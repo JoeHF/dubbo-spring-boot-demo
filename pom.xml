@@ -15,8 +15,8 @@
 	</modules>
 
 	<parent>
-		<artifactId>dubbo-spring-boot-parent</artifactId>
 		<groupId>com.alibaba.boot</groupId>
+		<artifactId>dubbo-spring-boot-parent</artifactId>
 		<version>0.2.0</version>
 	</parent>
 </project>
