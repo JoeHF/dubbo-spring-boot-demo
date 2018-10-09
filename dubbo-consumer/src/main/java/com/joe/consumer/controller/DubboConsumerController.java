@@ -20,6 +20,5 @@ public class DubboConsumerController {
         City city = demoService.findCityByName(name);
         return city.getCityName();
     }
-
 }
 
