@@ -17,7 +17,7 @@ public class CityService implements ICityService {
     @Override
     public City findCityByName(String cityName) {
         City city = new City();
-        city.setCityName(cityName + " test ff");
+        city.setCityName(cityName + " from vultr");
         return city;
     }
 }
