@@ -12,7 +12,7 @@ public class DubboConsumerController {
 
     @Reference(version = "1.0.0",
             application = "${dubbo.application.id}",
-            url = "dubbo://127.0.0.1:12345")
+            url = "dubbo://140.82.48.82:12345")
     private ICityService demoService;
 
     @RequestMapping("/sayHello")
