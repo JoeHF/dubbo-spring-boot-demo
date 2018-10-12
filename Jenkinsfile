@@ -24,11 +24,10 @@ pipeline {
                 }
               }
         }
-        stage('push Docker Image') {
+        stage('Push Docker Image') {
             steps {
-                echo 'build image start'
                 script {
-                    echo "Push docker image"
+                    echo "Push docker image to dockerhub"
                     docker.withRegistry('https://registry.hub.docker.com', 'docker-hub-credentials') {
                         dockerImage.push("${env.BUILD_NUMBER}")
                         dockerImage.push("latest")
