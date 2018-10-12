@@ -6,7 +6,6 @@ pipeline {
         }
     }
     stages {
-        def app
         stage('Build Project') {
             steps {
                 echo 'Hello world!'
