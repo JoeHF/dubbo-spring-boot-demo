@@ -1,4 +1,7 @@
 pipeline {
+    environment {
+        dockerImage = ''
+    }
     agent none
     stages {
         stage('Build Project') {
@@ -14,14 +17,21 @@ pipeline {
             }
         }
         stage('Build Docker Image') {
+            steps{
+                script {
+                    echo 'Build docker image'
+                    dockerImage = docker.build("joehou/dubbo-provider")
+                }
+              }
+        }
+        stage('push Docker Image') {
             steps {
                 echo 'build image start'
                 script {
-                    def app = docker.build("joehou/dubbo-provider")
-                    echo "push"
+                    echo "Push docker image"
                     docker.withRegistry('https://registry.hub.docker.com', 'docker-hub-credentials') {
-                        app.push("${env.BUILD_NUMBER}")
-                        app.push("latest")
+                        dockerImage.push("${env.BUILD_NUMBER}")
+                        dockerImage.push("latest")
                     }
                 }
             }
