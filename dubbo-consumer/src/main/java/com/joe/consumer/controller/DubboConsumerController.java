@@ -11,8 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class DubboConsumerController {
 
     @Reference(version = "1.0.0",
-            application = "${dubbo.application.id}",
-            url = "dubbo://140.82.48.82:12345")
+            application = "${dubbo.application.id}")
     private ICityService demoService;
 
     @RequestMapping("/sayHello")
