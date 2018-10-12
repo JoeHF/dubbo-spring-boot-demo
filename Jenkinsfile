@@ -6,15 +6,24 @@ pipeline {
         }
     }
     stages {
-        stage('Stage 1') {
+        def app
+        stage('Build Project') {
             steps {
                 echo 'Hello world!'
                 sh 'mvn -B -DskipTests clean package'
             }
         }
-        stage('Stage 2') {
+        stage('Build Docker Image') {
             steps {
-                echo 'Hello, JDK'
+                echo 'build image start'
+                app = docker.build("joehou/dubbo-provider")
+            }
+        }
+        stage('Push image') {
+            echo "push"
+            docker.withRegistry('https://registry.hub.docker.com', 'docker-hub-credentials') {
+                app.push("${env.BUILD_NUMBER}")
+                app.push("latest")
             }
         }
     }
