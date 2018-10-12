@@ -21,9 +21,6 @@ pipeline {
             }
         }
         stage('Push image') {
-            environment {
-
-            }
             steps {
                 echo "push"
                 script {
