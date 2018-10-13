@@ -1,4 +1,4 @@
-package com.joe.provider.bootstrap;
+package com.joe.provider;
 
 
 import org.springframework.boot.SpringApplication;
