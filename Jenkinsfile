@@ -8,15 +8,9 @@ pipeline {
     }
     stages {
         stage('Build Project') {
-            // agent {
-            //     docker {
-            //         image 'maven:3-alpine'
-            //         args '-v /root/.m2:/root/.m2'
-            //     }
-            // }
             steps {
                 echo 'Hello world!'
-                sh 'mvn -B -DskipTests clean package'
+                sh 'mvn -B -DskipTests package'
             }
         }
         stage('Build Docker Image') {
