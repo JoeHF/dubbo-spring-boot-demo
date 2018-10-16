@@ -5,7 +5,7 @@ This is the demo providing provider and consumer using alibaba dubbo
 1. `mvn -Drat.skip=true clean install`
 
 ## java formatter
-1. `mvn com.coveo:fmt-maven-plugin:format`
+you need to first format your java code by running `mvn fmt:format`
 
 ## run provider
 run dirrectly
