@@ -7,17 +7,16 @@ import org.springframework.stereotype.Component;
 
 @Component
 @Service(
-        version = "${demo.service.version}",
-        application = "${dubbo.application.id}",
-        protocol = "${dubbo.protocol.id}",
-        registry = "${dubbo.registry.id}",
-        interfaceClass = ICityService.class
-)
+    version = "${demo.service.version}",
+    application = "${dubbo.application.id}",
+    protocol = "${dubbo.protocol.id}",
+    registry = "${dubbo.registry.id}",
+    interfaceClass = ICityService.class)
 public class CityService implements ICityService {
-    @Override
-    public City findCityByName(String cityName) {
-        City city = new City();
-        city.setCityName(cityName + " from vultr tt");
-        return city;
-    }
+  @Override
+  public City findCityByName(String cityName) {
+    City city = new City();
+    city.setCityName(cityName + " from vultr tt");
+    return city;
+  }
 }

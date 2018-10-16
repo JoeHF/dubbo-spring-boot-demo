@@ -2,56 +2,53 @@ package com.joe.api.model;
 
 import java.io.Serializable;
 
-/**
- * Created by joehou on 09/10/2018.
- */
+/** Created by joehou on 09/10/2018. */
 public class City implements Serializable {
 
-    private static final long serialVersionUID = -1L;
-    private Long id;
-    private Long provinceId;
-    private String cityName;
-    private String description;
+  private static final long serialVersionUID = -1L;
+  private Long id;
+  private Long provinceId;
+  private String cityName;
+  private String description;
 
-    public City() {
-    }
+  public City() {}
 
-    public City(Long id, Long provinceId, String cityName, String description) {
-        this.id = id;
-        this.provinceId = provinceId;
-        this.cityName = cityName;
-        this.description = description;
-    }
+  public City(Long id, Long provinceId, String cityName, String description) {
+    this.id = id;
+    this.provinceId = provinceId;
+    this.cityName = cityName;
+    this.description = description;
+  }
 
-    public Long getId() {
-        return id;
-    }
+  public Long getId() {
+    return id;
+  }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+  public void setId(Long id) {
+    this.id = id;
+  }
 
-    public Long getProvinceId() {
-        return provinceId;
-    }
+  public Long getProvinceId() {
+    return provinceId;
+  }
 
-    public void setProvinceId(Long provinceId) {
-        this.provinceId = provinceId;
-    }
+  public void setProvinceId(Long provinceId) {
+    this.provinceId = provinceId;
+  }
 
-    public String getCityName() {
-        return cityName;
-    }
+  public String getCityName() {
+    return cityName;
+  }
 
-    public void setCityName(String cityName) {
-        this.cityName = cityName;
-    }
+  public void setCityName(String cityName) {
+    this.cityName = cityName;
+  }
 
-    public String getDescription() {
-        return description;
-    }
+  public String getDescription() {
+    return description;
+  }
 
-    public void setDescription(String description) {
-        this.description = description;
-    }
+  public void setDescription(String description) {
+    this.description = description;
+  }
 }

@@ -1,20 +1,18 @@
 package com.joe.consumer.bean;
 
-import org.springframework.boot.SpringBootConfiguration;
-import org.springframework.context.annotation.Bean;
-
 import java.util.HashMap;
 import java.util.Map;
+import org.springframework.boot.SpringBootConfiguration;
+import org.springframework.context.annotation.Bean;
 
 @SpringBootConfiguration
 public class ConfigurationTest {
 
-    @Bean
-    public Map createMap(){
-        Map map = new HashMap();
-        map.put("username","zhihao.miao");
-        map.put("age",27);
-        return map;
-    }
+  @Bean
+  public Map createMap() {
+    Map map = new HashMap();
+    map.put("username", "zhihao.miao");
+    map.put("age", 27);
+    return map;
+  }
 }
-
