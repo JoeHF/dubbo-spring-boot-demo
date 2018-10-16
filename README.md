@@ -1,13 +1,16 @@
 # dubbo-spring-boot-demo
-This is the demo providing provider and consumer using alibaba dubbo
+This is the demo project using alibaba dubbo to implement micro service. 
 
-## build project
+## DevOps
+This project enables jenkins as continual integration tool supporting automatic testing and building package after merging code to master. Also we use docker hub to upload built service package and keep online service update to date.
+
+## Build project
 1. `mvn -Drat.skip=true clean install`
 
-## java formatter
+## Format java code
 you need to first format your java code by running `mvn fmt:format`
 
-## run provider
+## Run Provider service
 run dirrectly
 1. `cd dubbo-spring-boot-demo/dubbo-provider`
 2. `mvn exec:java -Dexec.mainClass="com.joe.provider.DubboProviderApplication"`
