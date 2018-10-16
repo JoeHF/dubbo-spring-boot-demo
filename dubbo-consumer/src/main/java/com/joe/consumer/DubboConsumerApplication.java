@@ -1,5 +1,6 @@
 package com.joe.consumer;
 
+import com.joe.consumer.bean.MyBean;
 import com.joe.consumer.bean.User;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -14,6 +15,11 @@ public class DubboConsumerApplication {
     @Bean
     public Runnable createRunnable(){
         return () -> System.out.println("spring boot is running");
+    }
+
+    @Bean
+    public MyBean getMyBean() {
+        return new MyBean();
     }
 
     public static void main(String[] args) {
