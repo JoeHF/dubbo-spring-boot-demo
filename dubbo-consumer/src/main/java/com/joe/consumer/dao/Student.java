@@ -9,5 +9,5 @@ public class Student {
   private String branch;
   private int percentage;
   private int phone;
-     private String email;
+    private String email;
 }
