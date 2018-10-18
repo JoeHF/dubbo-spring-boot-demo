@@ -2,6 +2,7 @@
 dubbo-api/target/*
 dubbo-consumer/target/*
 dubbo-provider/target/*
+custom-udf/target/*
 ./dubbo-provider/target
 ./dubbo-consumer/target
 ./dubbo-provider/target/

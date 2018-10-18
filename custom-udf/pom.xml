@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+		 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		 xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<parent>
+		<artifactId>dubbo-spring-boot</artifactId>
+		<groupId>com.joe</groupId>
+		<version>1.0-SNAPSHOT</version>
+	</parent>
+	<modelVersion>4.0.0</modelVersion>
+
+	<artifactId>custom-udf</artifactId>
+
+	<properties>
+		<project.build.sourceEncoding>UTF8</project.build.sourceEncoding>
+		<!--Hadoop版本更改成自己的版本-->
+		<hadoop.version>2.5.0-cdh5.3.3</hadoop.version>
+		<hive.version>0.13.1-cdh5.3.3</hive.version>
+	</properties>
+
+	<repositories>
+		<!--加入Hadoop原生态的maven仓库的地址-->
+		<repository>
+			<id>Apache Hadoop</id>
+			<name>Apache Hadoop</name>
+			<url>https://repo1.maven.org/maven2/</url>
+		</repository>
+		<!--加入cdh的maven仓库的地址-->
+		<repository>
+			<id>cloudera</id>
+			<name>cloudera</name>
+			<url>https://repository.cloudera.com/artifactory/cloudera-repos/</url>
+		</repository>
+	</repositories>
+
+	<dependencies>
+		<!--添加hadoop依赖-->
+		<dependency>
+			<groupId>org.apache.hadoop</groupId>
+			<artifactId>hadoop-common</artifactId>
+			<version>${hadoop.version}</version>
+		</dependency>
+		<!--添加hive依赖-->
+		<dependency>
+			<groupId>org.apache.hive</groupId>
+			<artifactId>hive-exec</artifactId>
+			<version>${hive.version}</version>
+		</dependency>
+	</dependencies>
+
+	<!--<build>-->
+		<!--<plugins>-->
+			<!--&lt;!&ndash;编译插件&ndash;&gt;-->
+			<!--<plugin>-->
+				<!--<groupId>org.apache.maven.plugins</groupId>-->
+				<!--<artifactId>maven-compiler-plugin</artifactId>-->
+				<!--<version>3.7.0</version>-->
+				<!--<configuration>-->
+					<!--<source>1.8</source>-->
+					<!--<target>1.8</target>-->
+				<!--</configuration>-->
+			<!--</plugin>-->
+			<!--&lt;!&ndash; 打包 &ndash;&gt;-->
+			<!--<plugin>-->
+				<!--<artifactId>maven-assembly-plugin</artifactId>-->
+				<!--<version>2.6</version>  &lt;!&ndash;最终好像应用的时2.2-beta-5? &ndash;&gt;-->
+				<!--<configuration>-->
+					<!--<descriptorRefs>-->
+						<!--<descriptorRef>jar-with-dependencies</descriptorRef>-->
+					<!--</descriptorRefs>-->
+					<!--<archive>-->
+						<!--<manifest>-->
+							<!--&lt;!&ndash;运行jar包时运行的主类，要求类全名&ndash;&gt;-->
+							<!--<mainClass>com.joe.udf.UDFZodiacSign</mainClass>-->
+						<!--</manifest>-->
+					<!--</archive>-->
+				<!--</configuration>-->
+				<!--<executions>-->
+					<!--<execution>  &lt;!&ndash; 配置执行器 &ndash;&gt;-->
+						<!--<id>make-assembly</id>-->
+						<!--<phase>package</phase>  &lt;!&ndash; 绑定到package生命周期阶段上 &ndash;&gt;-->
+						<!--<goals>-->
+							<!--<goal>single</goal>  &lt;!&ndash; 只运行一次 &ndash;&gt;-->
+						<!--</goals>-->
+					<!--</execution>-->
+				<!--</executions>-->
+			<!--</plugin>-->
+		<!--</plugins>-->
+		<!--&lt;!&ndash;<plugins>&ndash;&gt;-->
+			<!--&lt;!&ndash;<plugin>&ndash;&gt;-->
+				<!--&lt;!&ndash;<groupId>org.apache.maven.plugins</groupId>&ndash;&gt;-->
+				<!--&lt;!&ndash;<artifactId>maven-shade-plugin</artifactId>&ndash;&gt;-->
+				<!--&lt;!&ndash;<version>2.2</version>&ndash;&gt;-->
+				<!--&lt;!&ndash;<executions>&ndash;&gt;-->
+					<!--&lt;!&ndash;<execution>&ndash;&gt;-->
+						<!--&lt;!&ndash;<phase>package</phase>&ndash;&gt;-->
+						<!--&lt;!&ndash;<goals>&ndash;&gt;-->
+							<!--&lt;!&ndash;<goal>shade</goal>&ndash;&gt;-->
+						<!--&lt;!&ndash;</goals>&ndash;&gt;-->
+						<!--&lt;!&ndash;<configuration>&ndash;&gt;-->
+						<!--&lt;!&ndash;</configuration>&ndash;&gt;-->
+					<!--&lt;!&ndash;</execution>&ndash;&gt;-->
+				<!--&lt;!&ndash;</executions>&ndash;&gt;-->
+			<!--&lt;!&ndash;</plugin>&ndash;&gt;-->
+		<!--&lt;!&ndash;</plugins>&ndash;&gt;-->
+	<!--</build>-->
+	<!--
+下面是用于打包的插件，如果不用这个插件导出jar可能会出现问题
+-->
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-shade-plugin</artifactId>
+				<version>1.4</version>
+				<executions>
+					<execution>
+						<phase>package</phase>
+						<goals>
+							<goal>shade</goal>
+						</goals>
+						<configuration>
+							<filters>
+								<filter>
+									<artifact>*:*</artifact>
+									<excludes>
+										<exclude>META-INF/*.SF</exclude>
+										<exclude>META-INF/*.DSA</exclude>
+										<exclude>META-INF/*.RSA</exclude>
+									</excludes>
+								</filter>
+							</filters>
+
+							<transformers>
+								<transformer
+									implementation="org.apache.maven.plugins.shade.resource.AppendingTransformer">
+									<resource>META-INF/spring.handlers</resource>
+								</transformer>
+								<transformer
+									implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
+									<mainClass>com.neu.hive.UDF.ToUpperCaseUDF</mainClass>
+								</transformer>
+								<transformer
+									implementation="org.apache.maven.plugins.shade.resource.AppendingTransformer">
+									<resource>META-INF/spring.schemas</resource>
+								</transformer>
+							</transformers>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+	</build>
+</project>
