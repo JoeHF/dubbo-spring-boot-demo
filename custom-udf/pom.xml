@@ -47,66 +47,7 @@
 			<version>${hive.version}</version>
 		</dependency>
 	</dependencies>
-
-	<!--<build>-->
-		<!--<plugins>-->
-			<!--&lt;!&ndash;编译插件&ndash;&gt;-->
-			<!--<plugin>-->
-				<!--<groupId>org.apache.maven.plugins</groupId>-->
-				<!--<artifactId>maven-compiler-plugin</artifactId>-->
-				<!--<version>3.7.0</version>-->
-				<!--<configuration>-->
-					<!--<source>1.8</source>-->
-					<!--<target>1.8</target>-->
-				<!--</configuration>-->
-			<!--</plugin>-->
-			<!--&lt;!&ndash; 打包 &ndash;&gt;-->
-			<!--<plugin>-->
-				<!--<artifactId>maven-assembly-plugin</artifactId>-->
-				<!--<version>2.6</version>  &lt;!&ndash;最终好像应用的时2.2-beta-5? &ndash;&gt;-->
-				<!--<configuration>-->
-					<!--<descriptorRefs>-->
-						<!--<descriptorRef>jar-with-dependencies</descriptorRef>-->
-					<!--</descriptorRefs>-->
-					<!--<archive>-->
-						<!--<manifest>-->
-							<!--&lt;!&ndash;运行jar包时运行的主类，要求类全名&ndash;&gt;-->
-							<!--<mainClass>com.joe.udf.UDFZodiacSign</mainClass>-->
-						<!--</manifest>-->
-					<!--</archive>-->
-				<!--</configuration>-->
-				<!--<executions>-->
-					<!--<execution>  &lt;!&ndash; 配置执行器 &ndash;&gt;-->
-						<!--<id>make-assembly</id>-->
-						<!--<phase>package</phase>  &lt;!&ndash; 绑定到package生命周期阶段上 &ndash;&gt;-->
-						<!--<goals>-->
-							<!--<goal>single</goal>  &lt;!&ndash; 只运行一次 &ndash;&gt;-->
-						<!--</goals>-->
-					<!--</execution>-->
-				<!--</executions>-->
-			<!--</plugin>-->
-		<!--</plugins>-->
-		<!--&lt;!&ndash;<plugins>&ndash;&gt;-->
-			<!--&lt;!&ndash;<plugin>&ndash;&gt;-->
-				<!--&lt;!&ndash;<groupId>org.apache.maven.plugins</groupId>&ndash;&gt;-->
-				<!--&lt;!&ndash;<artifactId>maven-shade-plugin</artifactId>&ndash;&gt;-->
-				<!--&lt;!&ndash;<version>2.2</version>&ndash;&gt;-->
-				<!--&lt;!&ndash;<executions>&ndash;&gt;-->
-					<!--&lt;!&ndash;<execution>&ndash;&gt;-->
-						<!--&lt;!&ndash;<phase>package</phase>&ndash;&gt;-->
-						<!--&lt;!&ndash;<goals>&ndash;&gt;-->
-							<!--&lt;!&ndash;<goal>shade</goal>&ndash;&gt;-->
-						<!--&lt;!&ndash;</goals>&ndash;&gt;-->
-						<!--&lt;!&ndash;<configuration>&ndash;&gt;-->
-						<!--&lt;!&ndash;</configuration>&ndash;&gt;-->
-					<!--&lt;!&ndash;</execution>&ndash;&gt;-->
-				<!--&lt;!&ndash;</executions>&ndash;&gt;-->
-			<!--&lt;!&ndash;</plugin>&ndash;&gt;-->
-		<!--&lt;!&ndash;</plugins>&ndash;&gt;-->
-	<!--</build>-->
-	<!--
-下面是用于打包的插件，如果不用这个插件导出jar可能会出现问题
--->
+	
 	<build>
 		<plugins>
 			<plugin>
