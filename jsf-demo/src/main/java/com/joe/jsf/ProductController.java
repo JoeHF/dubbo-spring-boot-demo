@@ -11,18 +11,17 @@ import org.springframework.stereotype.Component;
 @ELBeanName(value = "productController")
 @Join(path = "/product", to = "/product-form.jsf")
 public class ProductController {
-    @Autowired
-    private ProductRepository productRepository;
+  @Autowired private ProductRepository productRepository;
 
-    private Product product = new Product();
+  private Product product = new Product();
 
-    public String save() {
-        productRepository.save(product);
-        product = new Product();
-        return "/product-list.xhtml?faces-redirect=true";
-    }
+  public String save() {
+    productRepository.save(product);
+    product = new Product();
+    return "/product-list.xhtml?faces-redirect=true";
+  }
 
-    public Product getProduct() {
-        return product;
-    }
+  public Product getProduct() {
+    return product;
+  }
 }
