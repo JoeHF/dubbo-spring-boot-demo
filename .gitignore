@@ -8,3 +8,6 @@ custom-udf/target/*
 ./dubbo-provider/target/
 ./dubbo-consumer/target/
 target/*
+target/
+jsf-demo/src/main/webapp/WEB-INF/classes/
+jsf-demo/src/main/webapp/WEB-INF/classes/*
