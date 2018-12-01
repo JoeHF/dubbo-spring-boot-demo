@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 import lombok.extern.slf4j.Slf4j;
 import org.ocpsoft.rewrite.annotation.Join;
 import org.ocpsoft.rewrite.el.ELBeanName;
@@ -22,7 +23,7 @@ import org.springframework.stereotype.Component;
 @Join(path = "/air-ticket", to = "/air-ticket.jsf")
 @Slf4j
 public class JDAirTicketController {
-  private static final String url = "https://jipiao.jd.com/search/queryFlight.action";
+  private static final String baseUrl = "https://jipiao.jd.com/search/queryFlight.action";
   private JDAirTicketRequest jdAirTicketRequest = new JDAirTicketRequest();
   private List<JDAirFlightResponse> jdAirFlightResponses = new ArrayList<JDAirFlightResponse>();
 
@@ -32,7 +33,7 @@ public class JDAirTicketController {
     requestParams = new HashMap<String, String>();
     requestParams.put("queryModule", "1");
     requestParams.put("lineType", "OW");
-    requestParams.put("queryuuid", "6f5f89b7d232469ab74a46183c9f7f581542546845296");
+    requestParams.put("queryType", "listquery");
   }
 
   public JDAirTicketRequest getJdAirTicketRequest() {
@@ -44,21 +45,34 @@ public class JDAirTicketController {
   }
 
   public void setJdAirFlightResponses(List<JDAirFlightResponse> responses) {
+    if (responses == null) {
+      return;
+    }
+
     responses.forEach(response -> response.generateDerivedData());
     this.jdAirFlightResponses = responses;
   }
 
   public void query() {
-    log.info("jd_air_ticket_controller:{}", jdAirTicketRequest);
-
     requestParams.put("depCity", jdAirTicketRequest.getDepCity());
     requestParams.put("depDate", jdAirTicketRequest.getDepDate());
     requestParams.put("arrCity", jdAirTicketRequest.getArrCity());
-    requestParams.put("arrDate", "2018-12-20");
-    String resp = HttpRequest.get(url).form(requestParams).body();
+    requestParams.put("arrDate", jdAirTicketRequest.getDepDate());
+    String url = buildRequestUrl(requestParams);
+    String resp = HttpRequest.get(url).body();
     Gson gson = new Gson();
     ResponseWrapper<JDAirTicketResponse> responseWrapper =
         gson.fromJson(resp, new TypeToken<ResponseWrapper<JDAirTicketResponse>>() {}.getType());
     this.setJdAirFlightResponses(responseWrapper.getData().getFlights());
+  }
+
+  private String buildRequestUrl(Map<String, String> requestParams) {
+    String params =
+        requestParams
+            .entrySet()
+            .stream()
+            .map(entry -> entry.getKey() + "=" + entry.getValue())
+            .collect(Collectors.joining("&"));
+    return baseUrl + "?" + params;
   }
 }
