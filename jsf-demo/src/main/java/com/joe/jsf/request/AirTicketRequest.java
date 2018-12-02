@@ -1,9 +1,9 @@
-package com.joe.jsf;
+package com.joe.jsf.request;
 
 import lombok.Data;
 
 @Data
-public class JDAirTicketRequest {
+public class AirTicketRequest {
   private String depCity;
   private String arrCity;
   private String depDate;
