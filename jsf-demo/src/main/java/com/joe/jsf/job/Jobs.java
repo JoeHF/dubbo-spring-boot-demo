@@ -1,6 +1,5 @@
 package com.joe.jsf.job;
 
-import com.joe.jsf.request.AirTicketRequest;
 import com.joe.jsf.service.AirTicketService;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -17,14 +16,14 @@ public class Jobs {
 
   @Scheduled(fixedDelay = ONE_Minute)
   public void fixedDelayJob() {
-    AirTicketRequest request = new AirTicketRequest();
-    request.setDepCity("北京");
-    request.setDepDate("2018-12-15");
-    request.setArrCity("上海");
-    request.setArrDate("2018-12-15");
-    String resp = airTicketService.search(request);
+    //    AirTicketRequest request = new AirTicketRequest();
+    //    request.setDepCity("北京");
+    //    request.setDepDate("2018-12-15");
+    //    request.setArrCity("上海");
+    //    request.setArrDate("2018-12-15");
+    //    String resp = airTicketService.search(request);
+    //    System.out.println(resp);
     System.out.println(f.format(new Date()) + " >>fixedDelay执行....");
-    System.out.println(resp);
   }
 
   @Scheduled(fixedRate = ONE_Minute)

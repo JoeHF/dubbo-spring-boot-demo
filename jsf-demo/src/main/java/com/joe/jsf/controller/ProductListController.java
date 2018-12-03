@@ -1,5 +1,7 @@
-package com.joe.jsf;
+package com.joe.jsf.controller;
 
+import com.joe.jsf.dao.ProductMapper;
+import com.joe.jsf.model.Product;
 import java.util.List;
 import org.ocpsoft.rewrite.annotation.Join;
 import org.ocpsoft.rewrite.annotation.RequestAction;
@@ -15,15 +17,14 @@ import org.springframework.stereotype.Component;
 @ELBeanName(value = "productList")
 @Join(path = "/", to = "/product-list.jsf")
 public class ProductListController {
-  @Autowired private ProductRepository productRepository;
-
+  @Autowired private ProductMapper productMapper;
   private List<Product> products;
 
   @Deferred
   @RequestAction
   @IgnorePostback
   public void loadData() {
-    products = productRepository.findAll();
+    products = productMapper.selectAll();
   }
 
   public List<Product> getProducts() {
