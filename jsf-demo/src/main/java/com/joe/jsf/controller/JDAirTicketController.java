@@ -1,4 +1,4 @@
-package com.joe.jsf;
+package com.joe.jsf.controller;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;

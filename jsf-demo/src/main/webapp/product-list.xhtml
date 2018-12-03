@@ -9,23 +9,23 @@
 <ui:composition template="layout.xhtml">
     <ui:define name="content">
         <h:form id="form">
-            <p:panel header="Products List">
+            <p:panel header="收藏的航线">
                 <p:dataTable id="table" var="product" value="#{productList.products}">
                     <p:column>
                         <f:facet name="header"># Id</f:facet>
                         <h:outputText value="#{product.id}" />
                     </p:column>
-
                     <p:column>
-                        <f:facet name="header">Name</f:facet>
-                        <h:outputText value="#{product.name}" />
+                        <f:facet name="header">出发城市</f:facet>
+                        <h:outputText value="#{product.depCity}" />
                     </p:column>
-
                     <p:column>
-                        <f:facet name="header">Price</f:facet>
-                        <h:outputText value="#{product.price}">
-                            <f:convertNumber type="currency" currencySymbol="$ " />
-                        </h:outputText>
+                        <f:facet name="header">到达城市</f:facet>
+                        <h:outputText value="#{product.arrCity}" />
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">出发日期</f:facet>
+                        <h:outputText value="#{product.depDate}" />
                     </p:column>
                 </p:dataTable>
             </p:panel>
